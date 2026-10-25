@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#12141c" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Books">
+<title>Books</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <h1 id="viewTitle">Library</h1>
+  <button class="icon-btn" id="menuBtn" aria-label="Backup and settings">⋯</button>
+</header>
+
+<main>
+  <!-- LIBRARY -->
+  <section id="view-library" class="view active">
+    <div class="seg" role="tablist" id="shelfSeg">
+      <button data-shelf="want" class="on">Want to Read <span class="count" data-count="want"></span></button>
+      <button data-shelf="reading">Reading <span class="count" data-count="reading"></span></button>
+      <button data-shelf="finished">Finished <span class="count" data-count="finished"></span></button>
+    </div>
+    <div id="libraryList" class="list"></div>
+  </section>
+
+  <!-- DISCOVER -->
+  <section id="view-discover" class="view">
+    <form id="olForm" class="search">
+      <input id="olQuery" type="search" placeholder="Search title, author, ISBN…" autocomplete="off" enterkeyhint="search">
+      <button type="submit" class="btn primary">Search</button>
+    </form>
+    <div id="olStatus" class="status"></div>
+    <div id="olResults" class="list"></div>
+    <p class="hint">Can't find it? <button class="link" id="manualAddBtn">Add a book manually</button></p>
+  </section>
+
+  <!-- LISTEN -->
+  <section id="view-listen" class="view">
+    <div id="nowPlaying" class="now hidden"></div>
+    <form id="lvForm" class="search">
+      <input id="lvQuery" type="search" placeholder="Search free audiobooks (LibriVox)…" autocomplete="off" enterkeyhint="search">
+      <button type="submit" class="btn primary">Search</button>
+    </form>
+    <div id="lvStatus" class="status"></div>
+    <div id="lvResults" class="list"></div>
+    <h2 class="section-h" id="recentH">Continue listening</h2>
+    <div id="recentList" class="list"></div>
+    <p class="hint small">Audiobooks are free, public-domain recordings by LibriVox volunteers, streamed from the Internet Archive.</p>
+  </section>
+</main>
+
+<!-- Mini player -->
+<div id="mini" class="mini hidden">
+  <img id="miniCover" alt="">
+  <div class="mini-text" id="miniOpen">
+    <div class="mini-title" id="miniTitle"></div>
+    <div class="mini-sub" id="miniSub"></div>
+  </div>
+  <button class="icon-btn" id="miniBack" aria-label="Back 15 seconds">↺15</button>
+  <button class="icon-btn play" id="miniPlay" aria-label="Play">▶</button>
+  <div class="mini-progress"><div id="miniBar"></div></div>
+</div>
+
+<nav class="tabbar">
+  <button data-view="library" class="on"><span class="ti">📚</span>Library</button>
+  <button data-view="discover"><span class="ti">🔍</span>Discover</button>
+  <button data-view="listen"><span class="ti">🎧</span>Listen</button>
+</nav>
+
+<dialog id="sheet" class="sheet"><div id="sheetBody"></div></dialog>
+<div id="toast" class="toast"></div>
+<audio id="audio" preload="metadata"></audio>
+<input type="file" id="importFile" accept="application/json,.json" hidden>
+<script src="app.js"></script>
+</body>
+</html>
